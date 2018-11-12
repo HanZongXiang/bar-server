@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var dbConnect = require('./database/config');
+const MongoStore = require('connect-mongo')(session)
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -26,7 +27,10 @@ app.use(session({
   secret: 'cloudnote',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, expires: 1000 * 60 * 60 * 24 * 14 }
+  cookie: { secure: false, expires: 1000 * 60 * 60 * 24 * 14 },
+  store: new MongoStore({
+    mongooseConnection: dbConnect
+  })
 }))
 
 app.use('/', indexRouter);

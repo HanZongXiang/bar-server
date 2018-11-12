@@ -7,14 +7,18 @@ const journalism = new mongoose.Schema({
     ref: 'user'
   },
   title: String,
+  img: {
+    type: String,
+    required: true
+  },
   content: String,
   readnums: {
     type:Number,
-    default:66
+    default:0
   },
   commentnums: {
     type: Number,
-    default: 88
+    default: 0
   }
 },
   {
