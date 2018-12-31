@@ -2,8 +2,8 @@ const { Router } = require('express')
 const router = Router()
 const userModel = require('../database/model/user')
 
-router.get('/user',(req,res) => {
-
+router.get('/user', async (req,res) => {
+  let count = await userModel.count()
   let { pn = 1, size = 10 } = req.query
   pn = parseInt(pn)
   size = parseInt(size)
@@ -18,6 +18,7 @@ router.get('/user',(req,res) => {
     .then(data => {
       res.json({
         code: 200,
+        total: count,
         data
       })
     })

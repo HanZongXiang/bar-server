@@ -7,7 +7,6 @@ let musicSize = 10
 function getMusicSize() {
   musicModel.find({}, { _id: 1 }).then(data => {
     musicSize = data.length;
-    // console.log(data.length, 'length');
   })
 }
 getMusicSize()

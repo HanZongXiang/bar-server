@@ -38,6 +38,7 @@ router.post('/journalism', async (req, res) => {
 
 router.get('/journalisms',async (req,res,next) => {
   try {
+    let count = await journalismModel.count()
     let {
       page = 1, page_size = 10
     } = req.query
@@ -57,6 +58,7 @@ router.get('/journalisms',async (req,res,next) => {
       .then(data => {
         res.json({
           code: 200,
+          total: count,
           data
         })
       })
