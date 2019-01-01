@@ -7,6 +7,8 @@ const user = require('../controller/user');
 const music = require('../controller/music');
 const journalism = require('../controller/journalism');
 const goods = require('../controller/goods');
+const orders = require('../controller/orders')
+const cart = require('../controller/cart')
 
 router.use(register);
 router.use(login);
@@ -15,5 +17,7 @@ router.use(user);
 router.use(music);
 router.use(journalism);
 router.use(goods);
+router.use(orders)
+router.use(cart)
 
 module.exports = router;

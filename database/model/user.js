@@ -14,7 +14,11 @@ const user = new mongoose.Schema({
   },
   avatar: String,
   date:String,
-  tel:String
+  tel:String,
+  level: {
+    type: Number,
+    default: 0 // 0表示普通用户，1表示管理员
+  }
 },
   {
     versionKey: false,

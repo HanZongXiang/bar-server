@@ -20,7 +20,8 @@ router.post('/login', async (req, res) => {
           username: userData.username,
           email: userData.email,
           avatar: userData.avatar,
-          tel:userData.tel
+          tel:userData.tel,
+          level:userData.level
         };
 
         res.json({

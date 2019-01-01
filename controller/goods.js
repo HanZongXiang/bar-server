@@ -92,4 +92,25 @@ router.post('/goods/delete', (req, res) => {
     })
 })
 
+router.get('/goods/:id', async (req, res, next) => {
+  try {
+    const {
+      id
+    } = req.params
+    const data = await goodsModel.findById(id)
+      .populate({
+        path: 'uploader',
+        select: '-password'
+      })
+
+    res.json({
+      code: 200,
+      msg: '获取单条商品成功',
+      data
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
