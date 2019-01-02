@@ -4,11 +4,21 @@ const userModel = require('../database/model/user')
 
 router.post('/register', async (req, res, next) => {
   try {
-    const { username, email, password, tel, date, avatar,desc } = req.body;
+    const { username, email, password, tel, date, avatar,desc, problem, anwser } = req.body;
     // console.log(username, email, password);
 
     if (password && password.length >= 5) {
-      const data = await userModel.create({ username, email, password, avatar, tel, date,desc })
+      const data = await userModel.create({
+        username,
+        email,
+        password,
+        avatar,
+        tel,
+        date,
+        desc,
+        problem,
+        anwser
+      })
       res.json({
         code: 200,
         data,

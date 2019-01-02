@@ -40,6 +40,43 @@ router.get('/user/:id', (req, res) => {
     })
 })
 
+router.get('/forget/:tel', async (req, res) => {
+  try {
+    const { tel } = req.params
+    const data = await userModel.find({tel}).select('-password')
+    res.json({
+      code: 200,
+      data,
+      msg: '根据手机号获取信息成功'
+    })
+  } catch (error) {
+    res.json({
+      code: 400,
+      msg: '请求参数有误',
+      error
+    })
+  }
+})
+
+router.post('/forget/changePass', async (req, res) => {
+  try {
+    const { password, user } = req.body
+    const userInfo = await userModel.findById(user)
+    userInfo.set({password})
+    await userInfo.save()
+    res.json({
+      code: 200,
+      msg: '修改密码成功'
+    })
+  } catch (error) {
+     res.json({
+       code: 500,
+       msg: '服务器错误，请稍后再试'
+     })
+  }
+})
+
+
 router.post('/user/delete',(req,res) => {
   const {id} = req.body
   userModel.findByIdAndDelete(id)
