@@ -94,4 +94,20 @@ router.get('/journalisms/:id', async (req, res, next) => {
   }
 })
 
+router.post('/journalism/delete',(req,res) => {
+  const {id} = req.body
+  journalismModel.findByIdAndDelete(id)
+    .then(data => {
+      res.json({
+        code: 200,
+        msg:'删除新闻成功'
+      })
+    }).catch(err => {
+      res.json({
+        code: 400,
+        err
+      })
+    })
+})
+
 module.exports = router

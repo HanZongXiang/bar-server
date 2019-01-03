@@ -55,4 +55,20 @@ router.get('/message', (req, res) => {
     })
 })
 
+router.post('/message/delete',(req,res) => {
+  const {id} = req.body
+  messageModel.findByIdAndDelete(id)
+    .then(data => {
+      res.json({
+        code: 200,
+        msg:'删除留言成功'
+      })
+    }).catch(err => {
+      res.json({
+        code: 400,
+        err
+      })
+    })
+})
+
 module.exports = router
