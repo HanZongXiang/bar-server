@@ -6,19 +6,22 @@ const carts = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  checked: {
+    type: Boolean,
+    default: true
+  },
   product: {
     type: Schema.Types.ObjectId,
     ref: 'goods'
   },
-  total: {
+  productNum: {
     type: Number,
-    default: 0
+    default: 1
   }
 }, {
   versionKey: false,
   timestamps: {
-    createdAt: 'createdTime',
-    updatedAt: 'updatedTime'
+    createdAt: 'createdTime'
   }
 })
 

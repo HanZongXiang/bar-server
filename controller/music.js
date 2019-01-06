@@ -57,7 +57,7 @@ router.get('/music', (req, res) => {
     .limit(size)
     // .sort({_id:-1})
     .populate({
-      path: 'author',
+      path: 'uploader',
       select: '-password'
     })
     .then(data => {

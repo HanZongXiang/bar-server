@@ -6,12 +6,13 @@ const cartModel = require('../database/model/cart')
 
 router.post('/cart', async (req, res) => {
   try {
-    let { product,total } = req.body;
+    let { product,productNum } = req.body;
     let user = req.session.user._id;
     let response = await cartModel.create({
       user,
       product,
-      total
+      productNum,
+      checked: true
     })
     res.json({
       code: 200,
@@ -42,16 +43,31 @@ router.get('/cart/user', async (req, res) => {
   }
 })
 
-router.delete('/cart', async (req,res,next) => {
+router.post('/cartSettlement', async (req, res, next) => { // 删除轮播图
   try {
-    let user = req.session.user._id
-    const data = await cartModel.deleteMany({user})
-    res.json({
-      code: 200,
-      data
+    const {
+      ids
+    } = req.body
+    const deleteData = await cartModel.deleteMany({
+      _id: {
+        $in: ids
+      }
     })
-  } catch (error) {
-    console.log(error)
+    if (deleteData.n) {
+      res.json({
+        code: 200,
+        msg: `删除成功${deleteData.n}条数据`,
+        deleteData
+      })
+    } else {
+      res.json({
+        code: 201,
+        msg: '请先选择需要结算的商品'
+      })
+    }
+    
+  } catch (err) {
+    next(err)
   }
 })
 
