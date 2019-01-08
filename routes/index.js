@@ -9,6 +9,8 @@ const journalism = require('../controller/journalism');
 const goods = require('../controller/goods');
 const orders = require('../controller/orders')
 const cart = require('../controller/cart')
+const comment = require('../controller/comment')
+const reply = require('../controller/reply')
 
 router.use(register);
 router.use(login);
@@ -19,5 +21,7 @@ router.use(journalism);
 router.use(goods);
 router.use(orders)
 router.use(cart)
+router.use(comment)
+router.use(reply)
 
 module.exports = router;

@@ -19,7 +19,13 @@ const journalism = new mongoose.Schema({
   commentnums: {
     type: Number,
     default: 0
-  }
+  },
+  comment: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'comment'
+    }
+  ]
 },
   {
     versionKey: false,

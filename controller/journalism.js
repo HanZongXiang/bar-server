@@ -77,7 +77,9 @@ router.get('/journalisms/:id', async (req, res, next) => {
         path: 'uploader',
         select: '-password'
       })
-      
+      .populate({
+        path: 'comment'
+      })
 
     res.json({
       code: 200,
