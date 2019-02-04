@@ -1,4 +1,4 @@
-const { Router } = require('express')
+﻿const { Router } = require('express')
 const router = Router()
 const journalismModel = require('../database/model/journalism')
 
@@ -110,6 +110,32 @@ router.post('/journalism/delete',(req,res) => {
         err
       })
     })
+})
+
+router.patch('/journalism/:_id',async (req,res,next) => {
+  try {
+    const {_id} = req.params
+    let {
+      title,
+      content,
+      img
+    } = req.body;
+    const data = await newsModel.findById({_id})
+    const updateData = await data.updateOne({
+      $set: {
+        title,
+        content,
+        img
+      }
+    })
+    res.json({
+      code: 200,
+      msg: '新闻信息修改成功',
+      data: updateData
+    })
+  } catch (error) {
+    next(error)
+  }
 })
 
 module.exports = router
